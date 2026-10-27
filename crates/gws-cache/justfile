@@ -1,0 +1,21 @@
+test:
+    cargo test --package gws-cache --locked --all-targets
+    cargo test --package gws-cache --locked --doc
+
+lint:
+    cargo fmt --package gws-cache -- --check
+    cargo clippy --package gws-cache --locked --all-targets -- -D warnings
+
+coverage:
+    cargo llvm-cov --package gws-cache --exclude-from-report gws-cache-cli --locked --all-targets --fail-under-lines 90
+
+check: lint test coverage
+
+build:
+    cargo build --package gws-cache --locked --release
+
+fmt:
+    cargo fmt --package gws-cache -- --check
+
+fmt-check:
+    cargo fmt --package gws-cache -- --check
