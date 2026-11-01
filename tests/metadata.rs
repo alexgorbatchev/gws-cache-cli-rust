@@ -25,7 +25,7 @@ async fn canonical_skill_matches_the_native_interface_and_compiled_pointer() {
             .await,
             0
         );
-        assert_eq!(out, gws_cache_cli::args::INSTALL.as_bytes());
+        assert_eq!(out, INSTALL_TEXT.as_bytes());
     }
 }
 
@@ -140,3 +140,5 @@ async fn cancellation_and_broken_writers_are_reported_without_panics() {
     );
     assert!(String::from_utf8(err).unwrap().starts_with("[ERR]"));
 }
+
+const INSTALL_TEXT: &str = "Install the gws-cache skill using the Skills CLI:\n\n  npx skills add alexgorbatchev/gws-cache-cli --skill gws-cache\n\nSkill:\n\n  https://github.com/alexgorbatchev/gws-cache-cli/tree/main/skills/gws-cache\n";

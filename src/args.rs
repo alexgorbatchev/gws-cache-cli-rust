@@ -5,12 +5,13 @@ use cli_command_kit::{
 use gws_cache::Window;
 use std::{path::PathBuf, time::Duration};
 
-pub const INSTALL: &str = "Install the gws-cache skill using the Skills CLI:\n\n  npx skills add alexgorbatchev/gws-cache-cli --skill gws-cache\n\nSkill:\n\n  https://github.com/alexgorbatchev/gws-cache-cli/tree/main/skills/gws-cache\n";
-
 pub fn help_options() -> HelpOptions {
     let width = cli_command_kit::terminal_width();
     HelpOptions {
-        skill: Some(INSTALL.into()),
+        skill: Some(
+            cli_command_kit::SkillSource::new("alexgorbatchev/gws-cache-cli", "main")
+                .expect("the fixed skill source names a GitHub repository"),
+        ),
         tree: TreeOptions {
             terminal_width: Some(if width == 0 { 100 } else { width }),
             ..Default::default()

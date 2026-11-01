@@ -50,9 +50,14 @@ pub async fn entry(
     let result = if matches.get_flag("version") {
         writeln!(out, "{}", env!("CARGO_PKG_VERSION")).map_err(Error::from)
     } else if matches.subcommand_name() == Some("skill") {
-        cli_command_kit::write_skill(&matches, &args::help_options(), &mut out)
-            .map(|_| ())
-            .map_err(Error::from)
+        cli_command_kit::write_skill(
+            &args::command(mode),
+            &matches,
+            &args::help_options(),
+            &mut out,
+        )
+        .map(|_| ())
+        .map_err(Error::from)
     } else if let Some(("completion", sub)) = matches.subcommand() {
         let mut completion = Vec::new();
         clap_complete::generate(
